@@ -1,0 +1,11 @@
+#!/bin/sh
+#Pre-Clean
+source _clean-up.sh
+#Create default Node.js project
+npm init -y
+#Install selenium server & download browser driver for selenium
+npm install --save-dev selenium-standalone && node ./config/selenium-drivers-install.js
+#Install codeceptjs (& puppeteer)
+#npm install --save-dev codeceptjs puppeteer
+npm install --save-dev codeceptjs webdriverio
+#exit
