@@ -1,0 +1,2 @@
+#!/bin/sh
+rm -rf node_modules output package.json package-lock.json && mkdir output
