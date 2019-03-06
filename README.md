@@ -1,8 +1,8 @@
 # Codeceptjs Test Project
 
-## 启动方式
+## Startup
 
-#### 初始化
+#### Initialization
 >**依赖NodeJS，没有的话需要先下载安装，这是[官网地址][2]**
 ```
 首先，确认NodeJS正常安装：
@@ -14,7 +14,7 @@
 然后，运行_initial(或者_initial.cmd)进行项目初始化，等待依赖的组件下载完成
 ```
 -----------------------------
-#### 启动
+#### Run
 ```
 新建一个node运行配置，node parameters按照下面的格式填写：
     ./node_modules/codeceptjs/bin/codecept.js run <test-script> --steps
@@ -26,7 +26,7 @@
 >测试用例的语法可以去[CodeceptJs-API][1]查询
 -----------------------------
 
-## 问题列表
+## Issues
 0. 初始化项目后把node_modules、output、package.json、package-lock.json这四个文件标记为忽略状态，避免VCS提交
 1. 正常结束（不区分测试用例是否失败）测试的情况下，驱动进程会自动退出；如果没有退出的话，可以手动在任务管理器结束掉；
     手动或异常结束的时候驱动进程不会自动退出，必须手动结束进程。<br/>
