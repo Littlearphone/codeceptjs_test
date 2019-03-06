@@ -1,49 +1,46 @@
+/****************************************************************************************************************************************************
+ *                                                                                                                                                  *
+ *  * Copyright: https://github.com/Littlearphone                                                                                                   *
+ *                                                                                                                                                  *
+ ****************************************************************************************************************************************************/
 class ConditionalElement extends Helper {
-    async doIfVisible(selector, callback, ...options) {
-        const helper = this.helpers['WebDriver'];
+    async doIfSee(selector, callback, ...options) {
+        const I = this.helpers['WebDriver'];
+        const numVisible = await I.grabNumberOfVisibleElements(selector, options);
+        if (numVisible && typeof callback === "function") {
+            callback();
+        }
+    }
+
+    async doIfDontSee(selector, callback, ...options) {
+        const I = this.helpers['WebDriver'];
+        const numVisible = await I.grabNumberOfVisibleElements(selector, options);
+        if (!numVisible && typeof callback === "function") {
+            callback();
+        }
+    }
+
+    async clickIfSee(selector, ...options) {
+        const I = this.helpers['WebDriver'];
         try {
-            const numVisible = await helper.grabNumberOfVisibleElements(selector, options);
+            const numVisible = await I.grabNumberOfVisibleElements(selector, options);
             if (numVisible) {
-                callback.call(helper, ...options);
+                I.click(selector, ...options);
             }
         } catch (err) {
             console.log('Skipping operation as element is not visible');
         }
     }
 
-    async doIfInvisible(selector, callback, ...options) {
-        const helper = this.helpers['WebDriver'];
+    async clickIfDontSee(selector, ...options) {
+        const I = this.helpers['WebDriver'];
         try {
-            const numVisible = await helper.grabNumberOfVisibleElements(selector, options);
+            const numVisible = await I.grabNumberOfVisibleElements(selector, options);
             if (!numVisible) {
-                callback.call(helper, ...options);
+                I.click(selector, ...options);
             }
         } catch (err) {
-            console.log('Skipping operation as element is not visible');
-        }
-    }
-
-    async clickIfVisible(selector, ...options) {
-        const helper = this.helpers['WebDriver'];
-        try {
-            const numVisible = await helper.grabNumberOfVisibleElements(selector, options);
-            if (numVisible) {
-                helper.click(helper, ...options);
-            }
-        } catch (err) {
-            console.log('Skipping operation as element is not visible');
-        }
-    }
-
-    async clickIfInvisible(selector, ...options) {
-        const helper = this.helpers['WebDriver'];
-        try {
-            const numVisible = await helper.grabNumberOfVisibleElements(selector, options);
-            if (!numVisible) {
-                helper.click(helper, ...options);
-            }
-        } catch (err) {
-            console.log('Skipping operation as element is not visible');
+            console.log('Skipping operation as element is visible');
         }
     }
 }
